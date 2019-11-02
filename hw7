@@ -1,0 +1,84 @@
+/*
+ * Name:Andre Cranford
+ * Date:11/1/19	
+ * Course Number: CSC111	
+ * Course Name: intro to java
+ * Problem Number: hw7
+ * Email: apcranford0001@student.stcc.edu
+ * Short Description of the Problem
+ */
+
+import java.util.Scanner;
+import static java.lang.Math.sin;
+
+public class hw7 {
+	final static String TITLE = "CSC111 Project Template";
+	final static String CONTINUE_PROMPT = "Do this again? [y/N] ";
+
+	// **********************************************
+	// Put as many methods you need here
+
+	static void cal_sin(float n) {
+		float accuracy = (float) 0.0001, denominator, sinx, sinval;
+
+		// Converting degrees to radian
+		n = n * (float) (3.142 / 180.0);
+
+		float x1 = n;
+
+		// maps the sum along the series
+		sinx = n;
+
+		// holds the actual value of sin(n)
+		sinval = (float) sin(n);
+		int i = 1;
+		do {
+			denominator = 2 * i * (2 * i + 1);
+			x1 = -x1 * n * n / denominator;
+			sinx = sinx + x1;
+			i = i + 1;
+		} while (accuracy <= sinval - sinx);
+		System.out.println(sinx);
+	}
+
+	// Main function
+
+	public static void main1(String[] args) {
+		float n = 90;
+		cal_sin(n);
+
+	}
+
+	// **********************************************
+	// Start your logic coding in the process method
+	private static void process(Scanner sc, String args[]) {
+		// Start Coding your problem in the process method
+
+		int x;
+		System.out.print("Enter value: ");
+		x = sc.nextInt();
+		System.out.println("Processing " + x + " ...");
+		sc.nextLine();
+	}
+
+	// **********************************************
+	// Do not change the doThisAgain method
+	private static boolean doThisAgain(Scanner sc, String prompt) {
+		System.out.print(prompt);
+		String doOver = sc.nextLine();
+		return doOver.trim().equalsIgnoreCase("Y");
+	}
+
+	// **********************************************
+	// Do not change the main method
+	public static void main(String args[]) {
+		System.out.println("Welcome to " + TITLE);
+		Scanner sc = new Scanner(System.in);
+		do {
+			process(sc, args);
+		} while (doThisAgain(sc, CONTINUE_PROMPT));
+		sc.close();
+		System.out.println("Thank you for using " + TITLE);
+	}
+
+}
